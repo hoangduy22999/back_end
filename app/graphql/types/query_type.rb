@@ -10,9 +10,6 @@ module Types
     # They will be entry points for queries on your schema.
 
     # TODO: remove me
-    field :profile, Types::ProfileType, null: false, description: 'An example field added by the generator'
-    def profile
-      User.first
-    end
+    field :profile, resolver: Resolvers::Profile, null: false, description: 'An example field added by the generator'
   end
 end
