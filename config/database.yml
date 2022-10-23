@@ -15,10 +15,11 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  username: hoangduy
-  password: password1
+  adapter: <%= ENV["DATABASE_ADAPTER"] %>
+  host: <%= ENV["DATABASE_HOSTNAME"] %>
+  encoding: <%= ENV['DATABASE_ENCODING'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
