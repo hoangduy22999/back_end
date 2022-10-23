@@ -31,9 +31,10 @@ gem 'ridgepole'
 
 gem 'dotenv-rails', groups: %i[development test]
 
-gem 'rubocop', '~> 1.37'
-
+gem 'graphql', '~> 2.0', '>= 2.0.15'
+gem 'pry', '~> 0.14.1'
 gem 'reek', '~> 6.1', '>= 6.1.1'
+gem 'rubocop', '~> 1.37'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
