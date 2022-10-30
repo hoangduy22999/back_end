@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class BackEndSchema < GraphQL::Schema
-  mutation(Types::MutationType)
-  query(Types::QueryType)
+  mutation Types::MutationType
+  query Types::QueryType
 
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader

@@ -6,5 +6,15 @@ module Mutations
     field_class Types::BaseField
     input_object_class Types::BaseInputObject
     object_class Types::BaseObject
+
+    private
+
+    def current_user
+      context.to_h[:current_user]
+    end
+
+    def params
+      @prepared_arguments
+    end
   end
 end

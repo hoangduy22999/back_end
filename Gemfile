@@ -27,14 +27,17 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+gem 'graphql', '~> 2.0', '>= 2.0.15'
 gem 'ridgepole'
 
 gem 'dotenv-rails', groups: %i[development test]
-
-gem 'graphql', '~> 2.0', '>= 2.0.15'
 gem 'pry', '~> 0.14.1'
 gem 'reek', '~> 6.1', '>= 6.1.1'
 gem 'rubocop', '~> 1.37'
+
+gem 'devise'
+gem 'jwt'
+gem 'simple_command'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
