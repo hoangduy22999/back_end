@@ -1,9 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-create_table(:users, id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_general_ci") do |t|
+create_table :users do |t|
   t.string 'first_name'
   t.string 'last_name'
-  t.string 'phone', null: false
   t.string "email", limit: 255
   t.datetime "birthday"
   t.string "encrypted_password", limit: 255, default: "", null: false
@@ -28,7 +27,8 @@ create_table(:users, id: { type: :bigint, unsigned: true }, charset: "utf8mb4", 
   t.string 'tel'
   t.bigint 'referral_id',null: true
   t.bigint 'creator_id',null: true
-
+  t.string 'phone', null: false
+  
   t.datetime "created_at", precision: 6, null: false
   t.datetime "updated_at", precision: 6, null: false
 

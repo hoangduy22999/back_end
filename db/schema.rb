@@ -16,10 +16,15 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
+  create_table 'jwt_denylist', force: :cascade do |t|
+    t.string 'jti', null: false
+    t.datetime 'exp', null: false
+    t.index ['jti'], name: 'index_jwt_denylist_on_jti'
+  end
+
   create_table 'users', force: :cascade do |t|
     t.string 'first_name'
     t.string 'last_name'
-    t.string 'phone', null: false
     t.string 'email', limit: 255
     t.datetime 'birthday'
     t.string 'encrypted_password', limit: 255, default: '', null: false
@@ -46,6 +51,7 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
     t.bigint 'creator_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.string 'phone', null: false
     t.index ['district_id'], name: 'index_users_on_district_id'
     t.index ['email'], name: 'index_users_on_email'
     t.index ['province_id'], name: 'index_users_on_province_id'
