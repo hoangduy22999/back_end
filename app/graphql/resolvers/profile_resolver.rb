@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Resolvers
-  class Profile < BaseResolver
+  class ProfileResolver < BaseResolver
     type Types::ProfileType, null: true
 
     def resolve
-      User.first
+      current_user
     end
   end
 end

@@ -2,5 +2,10 @@
 
 Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  post '/authenticate', to: 'authentication#authenticate'
+
+  namespace :v1 do
+    get '/profile', to: 'user#profile'
+    resources :user, only: [:create]
+  end
 end
