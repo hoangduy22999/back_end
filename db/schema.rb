@@ -16,6 +16,18 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
+  create_table 'cities', force: :cascade do |t|
+    t.string 'name', null: false
+    t.string 'post_code', null: false
+    t.index ['name'], name: 'index_cities_on_name'
+  end
+
+  create_table 'districts', force: :cascade do |t|
+    t.string 'name', null: false
+    t.integer 'city_id', null: false
+    t.index ['name'], name: 'index_districts_on_name'
+  end
+
   create_table 'jwt_denylist', force: :cascade do |t|
     t.string 'jti', null: false
     t.datetime 'exp', null: false
@@ -30,7 +42,6 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
     t.string 'encrypted_password', default: '', null: false
     t.string 'reset_password_token'
     t.integer 'role', default: 0, null: false
-    t.integer 'user_type', default: 0, null: false
     t.integer 'gender', default: 0, null: false
     t.datetime 'reset_password_sent_at'
     t.datetime 'remember_created_at'
@@ -40,20 +51,17 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
     t.string 'current_sign_in_ip', limit: 255
     t.string 'last_sign_in_ip', limit: 255
     t.integer 'status', default: 0, null: false
-    t.bigint 'ward_id'
     t.bigint 'district_id'
-    t.bigint 'province_id'
     t.string 'address'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.string 'phone', null: false
+    t.integer 'employee_id'
     t.index ['district_id'], name: 'index_users_on_district_id'
     t.index ['email'], name: 'index_users_on_email'
-    t.index ['province_id'], name: 'index_users_on_province_id'
+    t.index ['employee_id'], name: 'index_users_on_employee_id'
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
     t.index ['role'], name: 'index_users_on_role'
     t.index ['status'], name: 'index_users_on_status'
-    t.index ['user_type'], name: 'index_users_on_user_type'
-    t.index ['ward_id'], name: 'index_users_on_ward_id'
   end
 end
