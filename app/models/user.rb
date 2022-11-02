@@ -7,13 +7,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # validates
-  validates :phone, length: {in: 10..13}
+  validates :phone, length: { in: 10..13 }
+  validates :password, format: { with: PASSWORD_FORMAT }, unless: -> { password.blank? }
+
+  # relationships
+  belongs_to :district
 
   # enums
   enum role: {
     guest: 0,
     user: 1,
-    admin: 98,
+    admin: 98
   }, _prefix: true
 
   enum gender: {
@@ -28,5 +32,4 @@ class User < ApplicationRecord
       (('!'..'/').to_a.sample(1) + ('0'..'9').to_a.sample(2) + ('a'..'z').to_a.sample(8)).join
     end
   end
-  
 end

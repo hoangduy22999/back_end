@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.2"
+ruby '3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
@@ -35,11 +35,11 @@ gem 'pry', '~> 0.14.1'
 gem 'reek', '~> 6.1', '>= 6.1.1'
 gem 'rubocop', '~> 1.37'
 
+gem 'active_model_serializers'
+gem 'cancancan'
 gem 'devise'
 gem 'jwt'
 gem 'simple_command'
-gem 'active_model_serializers'
-gem 'cancancan'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
