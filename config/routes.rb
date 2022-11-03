@@ -2,10 +2,12 @@
 
 Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
-  post '/authenticate', to: 'authentication#authenticate'
 
   namespace :v1 do
+    post '/authenticate', to: 'authentication#authenticate'
     get '/profile', to: 'user#profile'
+    post '/forgot_password', to: 'password#forgot'
+    post '/reset_password', to: 'password#reset'
     resources :user, only: [:create]
   end
 end
