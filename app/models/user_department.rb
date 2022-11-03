@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+
+class UserDepartment < ApplicationRecord
+  # rollback function
+  before_create :set_startdate
+
+  # validates
+  validates :end_date, date: { before_or_equal_to: :start_date }, unless: -> { end_date.blank? }
+
+  # relationships
+  belongs_to :user
+  belongs_to :department
+
+  # enums
+  enum role: {
+    member: 0,
+    manager: 1
+  }, _prefix: true
+
+  private
+
+  def set_startdate
+    self.start_date = Date.current
+  end
+end

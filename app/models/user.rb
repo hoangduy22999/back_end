@@ -12,6 +12,11 @@ class User < ApplicationRecord
 
   # relationships
   belongs_to :district
+  has_many :user_departments
+  has_many :department, through: :user_departments
+
+  # nested attributes
+  accepts_nested_attributes_for :user_departments
 
   # enums
   enum role: {

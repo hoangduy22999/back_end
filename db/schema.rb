@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
     t.index ['name'], name: 'index_cities_on_name'
   end
 
+  create_table 'departments', force: :cascade do |t|
+    t.string 'name', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['name'], name: 'index_departments_on_name'
+  end
+
   create_table 'districts', force: :cascade do |t|
     t.string 'name', null: false
     t.integer 'city_id', null: false
@@ -41,6 +48,18 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
     t.string 'jti', null: false
     t.datetime 'exp', null: false
     t.index ['jti'], name: 'index_jwt_denylist_on_jti'
+  end
+
+  create_table 'user_departments', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'department_id', null: false
+    t.integer 'role', default: 0, null: false
+    t.datetime 'start_date', null: false
+    t.datetime 'end_date'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['department_id'], name: 'index_user_departments_on_department_id'
+    t.index ['user_id'], name: 'index_user_departments_on_user_id'
   end
 
   create_table 'users', force: :cascade do |t|
@@ -65,10 +84,8 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.string 'phone', null: false
-    t.integer 'employee_id'
     t.index ['district_id'], name: 'index_users_on_district_id'
     t.index ['email'], name: 'index_users_on_email'
-    t.index ['employee_id'], name: 'index_users_on_employee_id'
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
     t.index ['role'], name: 'index_users_on_role'
     t.index ['status'], name: 'index_users_on_status'

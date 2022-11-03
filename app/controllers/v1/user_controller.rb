@@ -26,7 +26,8 @@ module V1
     private
 
     def user_params
-      params.require(:user).permit(:last_name, :first_name, :email, :phone, :district_id, :address, :gender)
+      params.require(:user).permit(:last_name, :first_name, :email, :phone, :district_id, :address, :gender,
+                                   user_departments_attributes: %i[department_id role])
     end
   end
 end

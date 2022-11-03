@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require_relative './seed_pre_load'
+require 'json'
 
 include SeedPreLoad
 
-require 'json'
+DEPARTMENTS = %w[RUBY PHP JAVA REACT HR MARKETING ADMIN].freeze
+
 city_json = File.read('./db/json/tinh_tp.json')
 district_json = File.read('./db/json/quan_huyen.json')
 city_data = JSON.parse(city_json).map(&:last)
@@ -22,3 +24,10 @@ db_resources = City.pluck(:name)
 missing_resources = reject_skipping_resources(attributes, db_resources, 'name')
 
 missing_resources&.count&.times { |time| City.create(missing_resources[time]) }
+
+department_attribute = DEPARTMENTS.map do |department|
+  { name: department }
+end
+db_resources = Department.pluck(:id)
+missing_resources = reject_skipping_resources(department_attribute, db_resources, 'name')
+missing_resources&.count&.times { |time| Department.create(missing_resources[time]) }

@@ -37,6 +37,7 @@ gem 'rubocop', '~> 1.37'
 
 gem 'active_model_serializers'
 gem 'cancancan'
+gem 'date_validator'
 gem 'devise'
 gem 'jwt'
 gem 'simple_command'
