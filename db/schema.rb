@@ -18,13 +18,22 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
 
   create_table 'cities', force: :cascade do |t|
     t.string 'name', null: false
-    t.string 'post_code', null: false
+    t.string 'slug', null: false
+    t.string 'name_with_type', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
     t.index ['name'], name: 'index_cities_on_name'
   end
 
   create_table 'districts', force: :cascade do |t|
     t.string 'name', null: false
     t.integer 'city_id', null: false
+    t.string 'slug', null: false
+    t.string 'name_with_type', null: false
+    t.string 'path', null: false
+    t.string 'path_with_type', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
     t.index ['name'], name: 'index_districts_on_name'
   end
 

@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     post '/forgot_password', to: 'password#forgot'
     post '/reset_password', to: 'password#reset'
     resources :user, only: [:create]
+    resources :city, only: %i[index show]
   end
 end
