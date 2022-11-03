@@ -8,4 +8,10 @@ class UserMailer < ApplicationMailer
     @url  = 'http://example.com/login'
     mail(to: @user.email, subject: 'Welcome to My Awesome Site')
   end
+
+  def forgot_password
+    @user = params[:user]
+    @url = "#{ENV['NGROK_HOST']}/v1/reset_password?token=#{@user.reset_password_token}"
+    mail(to: @user.email, subject: 'Forgot Password Mail')
+  end
 end

@@ -26,10 +26,33 @@ class User < ApplicationRecord
     other: 2
   }, _prefix: true
 
+  def generate_password_token!
+    self.reset_password_token = generate_token
+    self.reset_password_sent_at = Time.now.utc
+    save!
+  end
+
+  def password_token_valid?
+    (reset_password_sent_at + 4.hours) > Time.now.utc
+  end
+
+  def reset_password!(password, password_confirmation)
+    self.reset_password_token = nil
+    self.password = password
+    self.password_confirmation = password_confirmation
+    save!
+  end
+
   # class method
   class << self
     def random_password
       (('!'..'/').to_a.sample(1) + ('0'..'9').to_a.sample(2) + ('a'..'z').to_a.sample(8)).join
     end
+  end
+
+  private
+
+  def generate_token
+    SecureRandom.hex(10)
   end
 end
