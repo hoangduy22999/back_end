@@ -1,8 +1,24 @@
 # frozen_string_literal: true
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
+require_relative './seed_pre_load'
+
+include SeedPreLoad
+
+require 'json'
+city_json = File.read('./db/json/tinh_tp.json')
+district_json = File.read('./db/json/quan_huyen.json')
+city_data = JSON.parse(city_json).map(&:last)
+district_data = JSON.parse(district_json).map(&:last)
+
+attributes = city_data.map do |city|
+  code = city['code']
+  districts = district_data.select { |district| district['parent_code'].eql?(code) }.map do |district|
+    district.slice!('parent_code', 'code', 'type')
+  end
+  city.slice!('code', 'type').merge(districts_attributes: districts)
+end
+db_resources = City.pluck(:name)
+
+missing_resources = reject_skipping_resources(attributes, db_resources, 'name')
+
+missing_resources&.count&.times { |time| City.create(missing_resources[time]) }
