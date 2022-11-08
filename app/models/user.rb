@@ -9,10 +9,11 @@ class User < ApplicationRecord
   # validates
   validates :phone, length: { in: 10..13 }
   validates :password, format: { with: PASSWORD_FORMAT }, unless: -> { password.blank? }
+  validates :address, :birthday, presence: true
 
   # relationships
   belongs_to :district
-  has_many :user_departments
+  has_many :user_departments, dependent: :destroy
   has_many :department, through: :user_departments
 
   # nested attributes

@@ -2,9 +2,15 @@
 
 module V1
   class UserController < ApplicationController
-    def profile
-      return unless can? :read, User.last
+    def index
+      if can? :read, User 
+        render json: User.all.paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
+      else
+        render json: {errors: "Permission denied"}, status: :unprocessable_entity
+      end
+    end
 
+    def profile
       render json: current_user
     end
 
@@ -23,11 +29,30 @@ module V1
       end
     end
 
+    def update
+      user = User.find_by_id(params[:id])
+      if !user.present?
+        render json: { errors: "Couldn't find user" }
+      elsif user.update(user_params)
+        render json: user, status: :ok
+      else
+        render json: user.errors, status: :unprocessable_entity
+      end
+    end
+
+    def update_profile
+      if current_user.update(user_params)
+        render json: current_user, status: :ok
+      else
+        render json: current_user.errors, status: :unprocessable_entity
+      end
+    end
+
     private
 
     def user_params
-      params.require(:user).permit(:last_name, :first_name, :email, :phone, :district_id, :address, :gender,
-                                   user_departments_attributes: %i[department_id role])
+      params.require(:user).permit(:last_name, :first_name, :email, :phone, :district_id, :address, :gender, :birthday,
+                                   user_departments_attributes: %i[id department_id role])
     end
   end
 end

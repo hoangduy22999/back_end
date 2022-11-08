@@ -4,7 +4,7 @@ create_table :users do |t|
   t.string 'first_name'
   t.string 'last_name'
   t.string :email,              null: false, default: ""
-  t.datetime "birthday"
+  t.datetime "birthday", null: false
   t.string :encrypted_password, null: false, default: ""
   t.string "reset_password_token", limit: 255
   t.integer "role", null: false, default: 0
@@ -18,7 +18,7 @@ create_table :users do |t|
   t.string "last_sign_in_ip", limit: 255
   t.integer 'status', null: false, default: 0
   t.bigint 'district_id', null: true
-  t.string 'address', null: true
+  t.string 'address', null: false
   t.string 'phone', null: false
 
   ## Recoverable
@@ -86,3 +86,8 @@ create_table :user_departments do |t|
   t.index ['user_id'], name: 'index_user_departments_on_user_id'
   t.index ['department_id'], name: 'index_user_departments_on_department_id'
 end
+
+add_foreign_key "districts", "cities", name: "city"
+add_foreign_key "users", "districts", name: "district"
+add_foreign_key "user_departments", "departments", name: "department"
+add_foreign_key "user_departments", "users", name: "user"

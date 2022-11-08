@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
     t.string 'first_name'
     t.string 'last_name'
     t.string 'email', default: '', null: false
-    t.datetime 'birthday'
+    t.datetime 'birthday', null: false
     t.string 'encrypted_password', default: '', null: false
     t.string 'reset_password_token'
     t.integer 'role', default: 0, null: false
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
     t.string 'last_sign_in_ip', limit: 255
     t.integer 'status', default: 0, null: false
     t.bigint 'district_id'
-    t.string 'address'
+    t.string 'address', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.string 'phone', null: false
@@ -90,4 +90,9 @@ ActiveRecord::Schema.define(version: 20_221_023_164_605) do
     t.index ['role'], name: 'index_users_on_role'
     t.index ['status'], name: 'index_users_on_status'
   end
+
+  add_foreign_key 'districts', 'cities', name: 'city'
+  add_foreign_key 'user_departments', 'departments', name: 'department'
+  add_foreign_key 'user_departments', 'users', name: 'user'
+  add_foreign_key 'users', 'districts', name: 'district'
 end
