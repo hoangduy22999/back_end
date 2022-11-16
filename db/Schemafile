@@ -20,6 +20,7 @@ create_table :users do |t|
   t.bigint 'district_id', null: true
   t.string 'address', null: false
   t.string 'phone', null: false
+  t.string 'avatar', null: true
 
   ## Recoverable
   t.string   :reset_password_token

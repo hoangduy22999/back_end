@@ -11,6 +11,9 @@ class User < ApplicationRecord
   validates :password, format: { with: PASSWORD_FORMAT }, unless: -> { password.blank? }
   validates :address, :birthday, presence: true
 
+  # upload
+  mount_uploader :avatar, ImageUploader
+
   # relationships
   belongs_to :district
   has_many :user_departments, dependent: :destroy
