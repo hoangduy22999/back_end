@@ -3,7 +3,7 @@
 module V1
   class DepartmentController < ApplicationController
     def index
-      render json: Department.includes(:users).all, except: :users
+      render json: Department.includes(:users).all
     end
   end
 end

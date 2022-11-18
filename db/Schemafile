@@ -67,11 +67,13 @@ end
 
 create_table :departments do |t|
   t.string 'name', null: false
+  t.integer 'manager_id'
 
   t.datetime "created_at", precision: 6, null: false
   t.datetime "updated_at", precision: 6, null: false
 
   t.index ['name'], name: 'index_departments_on_name'
+  t.index ['manager_id'], name: 'index_departments_on_manager_id'
 end
 
 create_table :user_departments do |t|
@@ -92,3 +94,4 @@ add_foreign_key "districts", "cities", name: "city"
 add_foreign_key "users", "districts", name: "district"
 add_foreign_key "user_departments", "departments", name: "department"
 add_foreign_key "user_departments", "users", name: "user"
+add_foreign_key "departments", "users", column: "manager_id" ,name: "user"

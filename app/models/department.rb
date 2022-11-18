@@ -4,4 +4,15 @@ class Department < ApplicationRecord
   # relationships
   has_many :user_departments, dependent: :destroy
   has_many :users, through: :user_departments
+  belongs_to :manager, class_name: 'User', foreign_key: 'manager_id'
+
+  # nested attributes
+  accepts_nested_attributes_for :user_departments
+
+  # enum
+  scope role: {
+    leader: 0,
+    subleader: 1,
+    member: 2
+  }, _prefix: true
 end
