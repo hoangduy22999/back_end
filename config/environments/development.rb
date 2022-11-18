@@ -74,9 +74,4 @@ Rails.application.configure do
     authentication: 'plain',
     enable_starttls_auto: true
   }
-
-  config.hosts << ENV['NGROK_HOST']
-  config.hosts << 'localhost:3000'
-  config.hosts << 'localhost:3001'
-  config.hosts << '127.0.0.1:3000'
 end

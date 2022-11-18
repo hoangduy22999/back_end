@@ -37,12 +37,12 @@ gem 'rubocop', '~> 1.37'
 
 gem 'active_model_serializers'
 gem 'cancancan'
+gem 'carrierwave'
 gem 'date_validator'
 gem 'devise'
 gem 'jwt'
 gem 'simple_command'
 gem 'will_paginate'
-gem 'carrierwave'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

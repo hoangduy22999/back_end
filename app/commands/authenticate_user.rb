@@ -9,7 +9,7 @@ class AuthenticateUser
   end
 
   def call
-    { auth_token: JsonWebToken.encode(user_id: user.id), role: user.role } if user
+    { auth_token: JsonWebToken.encode(user_id: user.id, sign_in_at: Time.zone.now), role: user.role } if user
   end
 
   private

@@ -16,7 +16,8 @@ class AuthorizeApiRequest
   attr_reader :headers
 
   def user
-    @user ||= User.find_by_id(decoded_auth_token[:user_id]) if decoded_auth_token
+    token = decoded_auth_token
+    @user ||= User.find_by_id(token[:user_id]) if token && expired_token?(token)
     @user || errors.add(:token, 'Invalid token') && nil
   end
 
@@ -30,5 +31,9 @@ class AuthorizeApiRequest
     errors.add(:token, 'Missing token')
 
     nil
+  end
+
+  def expired_token? token
+    DateTime.parse(token[:sign_in_at]) + EXPIRED_TIME.days > Time.zone.now
   end
 end
