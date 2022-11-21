@@ -33,7 +33,7 @@ class AuthorizeApiRequest
     nil
   end
 
-  def expired_token? token
-    DateTime.parse(token[:sign_in_at]) + EXPIRED_TIME.days > Time.zone.now
+  def expired_token?(token)
+    token[:sign_in_at] && DateTime.parse(token[:sign_in_at]) + EXPIRED_TIME.days > Time.zone.now
   end
 end

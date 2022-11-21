@@ -12,6 +12,6 @@ Rails.application.routes.draw do
     post '/reset_password', to: 'password#reset'
     resources :user, only: %i[index create update]
     resources :city, only: %i[index show]
-    resources :department, only: %i[index]
+    resources :department, only: %i[index create update edit]
   end
 end

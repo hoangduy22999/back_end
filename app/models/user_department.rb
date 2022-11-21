@@ -14,7 +14,8 @@ class UserDepartment < ApplicationRecord
   # enums
   enum role: {
     member: 0,
-    manager: 1
+    subleader: 1,
+    leader: 2
   }, _prefix: true
 
   private

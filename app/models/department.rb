@@ -8,11 +8,4 @@ class Department < ApplicationRecord
 
   # nested attributes
   accepts_nested_attributes_for :user_departments
-
-  # enum
-  scope role: {
-    leader: 0,
-    subleader: 1,
-    member: 2
-  }, _prefix: true
 end

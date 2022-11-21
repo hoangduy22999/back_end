@@ -41,6 +41,7 @@ gem 'carrierwave'
 gem 'date_validator'
 gem 'devise'
 gem 'jwt'
+gem 'ransack'
 gem 'simple_command'
 gem 'will_paginate'
 

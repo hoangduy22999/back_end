@@ -3,7 +3,8 @@
 module V1
   class CityController < ApplicationController
     def index
-      render json: City.all.includes(:districts).paginate(page: params[:page] || 1, per_page: params[:per_page] || 10),
+      render json: City.all.includes(:districts).ransack(params[:where]).result
+                       .paginate(page: params[:page] || 1, per_page: params[:per_page] || 10),
              status: :ok
     end
 

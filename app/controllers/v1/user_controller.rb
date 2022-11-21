@@ -4,7 +4,8 @@ module V1
   class UserController < ApplicationController
     def index
       if can? :read, User
-        render json: User.all.paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
+        render json: User.all.ransack(params[:where]).result
+                         .paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
       else
         render json: { errors: 'Permission denied' }, status: :unprocessable_entity
       end
@@ -57,7 +58,7 @@ module V1
 
     def user_params
       params.require(:user).permit(:last_name, :first_name, :email, :phone, :district_id, :address, :gender, :birthday, :avatar,
-                                   user_departments_attributes: %i[id department_id role])
+                                   user_departments_attributes: %i[id department_id role start_date end_date])
     end
   end
 end
