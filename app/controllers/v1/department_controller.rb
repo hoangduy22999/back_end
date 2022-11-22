@@ -47,7 +47,7 @@ module V1
 
     def department_params
       params.require(:department).permit(:name, :manager_id,
-                                         user_departments_attributes: %i[id user_id role start_date end_date])
+                                         user_departments_attributes: %i[id user_id role start_date end_date _destroy])
     end
 
     def set_department

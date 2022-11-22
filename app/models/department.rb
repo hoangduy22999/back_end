@@ -7,5 +7,5 @@ class Department < ApplicationRecord
   belongs_to :manager, class_name: 'User', foreign_key: 'manager_id'
 
   # nested attributes
-  accepts_nested_attributes_for :user_departments
+  accepts_nested_attributes_for :user_departments, allow_destroy: true
 end

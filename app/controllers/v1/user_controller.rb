@@ -57,7 +57,7 @@ module V1
 
     def user_params
       params.require(:user).permit(:last_name, :first_name, :email, :phone, :district_id, :address, :gender, :birthday, :avatar,
-                                   user_departments_attributes: %i[id department_id role start_date end_date])
+                                   user_departments_attributes: %i[id department_id role start_date end_date _destroy])
     end
   end
 end

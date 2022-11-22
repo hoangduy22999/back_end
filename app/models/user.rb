@@ -20,7 +20,7 @@ class User < ApplicationRecord
   has_many :department, through: :user_departments
 
   # nested attributes
-  accepts_nested_attributes_for :user_departments
+  accepts_nested_attributes_for :user_departments, allow_destroy: true
 
   # enums
   enum role: {
