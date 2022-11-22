@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  post '/graphql', to: 'graphql#execute'
-  match '(:anything)' => 'application#nothing', via: [:options]
-
   namespace :v1 do
     post '/authenticate', to: 'authentication#authenticate'
     get '/profile', to: 'user#profile'

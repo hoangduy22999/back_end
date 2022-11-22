@@ -5,9 +5,10 @@ module V1
     def index
       if can? :read, User
         render json: User.all.ransack(params[:where]).result
+                         .order(params[:column] || "created_at" => params[:order] || "desc")
                          .paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
       else
-        render json: { errors: 'Permission denied' }, status: :unprocessable_entity
+        permission_error
       end
     end
 
@@ -21,36 +22,34 @@ module V1
       if can? :create, user
         if user.save
           UserMailer.with(user: user).welcome_email.deliver_later
-          render json: { message: 'User is successfully created', user: user }, status: :created
+          created_render(user)
         else
-          render json: user.errors, status: :unprocessable_entity
+          validate_error(user)
         end
       else
-        render json: { errors: 'Permission denied' }, status: :unprocessable_entity
+        permission_error
       end
     end
 
     def update
-      user = User.find_by_id(params[:id])
-      return render json: { errors: "Couldn't find user" } unless user
+      invalid_error(User)
 
       if can? :update, user
         if user.update(user_params)
-          render json: { message: 'User is successfully updated', user: user }, status: :ok
+          updated_render(user)
         else
-          render json: user.errors, status: :unprocessable_entity
+          validate_error(user)
         end
       else
-        render json: { errors: 'Permission denied' }, status: :unprocessable_entity
+        permission_error
       end
     end
 
     def update_profile
       if current_user.update(user_params)
-        render json: { message: 'User is successfully updated', current_user: current_user },
-               status: :ok
+        updated_render(current_user)
       else
-        render json: current_user.errors, status: :unprocessable_entity
+        validate_error(current_user)
       end
     end
 

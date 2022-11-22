@@ -6,6 +6,7 @@ module V1
 
     def index
       render json: Department.includes(:users).all.ransack(params[:where]).result
+                             .order(params[:column] || "created_at" => params[:order] || "desc")
                              .paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
     end
 
@@ -13,32 +14,32 @@ module V1
       department = Department.new(department_params)
       if can? :create, department
         if department.save
-          render json: { message: 'Department is successfully created', department: department }, status: :created
+          created_render(department)
         else
-          render json: department.errors, status: :unprocessable_entity
+          validate_error(department)
         end
       else
-        render json: { errors: 'Permission denied' }, status: :unprocessable_entity
+        permission_error
       end
     end
 
     def edit
       if can? :read, @department
-        render json: { message: 'Success', department: @department }, status: :ok
+        sucess_render(@department)
       else
-        render json: { errors: 'Permission denied' }, status: :unprocessable_entity
+        permission_error
       end
     end
 
     def update
       if can? :update, @department
         if @department.update(department_params)
-          render json: { message: 'Department is successfully updated', department: @department }, status: :created
+          updated_render(@department)
         else
-          render json: @department.errors, status: :unprocessable_entity
+          validate_error(@department)
         end
       else
-        render json: { errors: 'Permission denied' }, status: :unprocessable_entity
+        permission_error
       end
     end
 
@@ -50,7 +51,7 @@ module V1
     end
 
     def set_department
-      @department = Department.includes(:users).find_by(id: params[:id])
+      @department = find_record(Department)
     end
   end
 end
