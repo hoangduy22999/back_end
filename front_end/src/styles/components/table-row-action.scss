@@ -1,0 +1,16 @@
+.table-row-action {
+  display: flex;
+  justify-content: space-around;
+  .img-row {
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+  }
+  .img-row:first-child {
+    margin-right: 5px;
+    color: blue;
+  }
+  .ant-popover-inner {
+    width: 200px;
+  }
+}

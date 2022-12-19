@@ -1,0 +1,29 @@
+.auth-layout {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  font-size: 16px;
+  background-image: linear-gradient(to right top, #3e9041, #3da65a, #39bd76, #2ed493, #12ebb2);
+}
+
+.auth-layout-form {
+  margin: auto;
+  min-width: 500px !important;
+  max-width: 600px !important;
+  // height: 90vh;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 65px 55px;
+}
+
+.auth-btn-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    flex-basis: 40%;
+  }
+}
