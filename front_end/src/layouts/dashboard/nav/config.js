@@ -32,6 +32,11 @@ const navConfig = [
     icon: icon('ic_lock'),
   },
   {
+    title: 'fogot password',
+    path: '/forgot_password',
+    icon: icon('ic_lock'),
+  },
+  {
     title: 'Not found',
     path: '/404',
     icon: icon('ic_disabled'),
