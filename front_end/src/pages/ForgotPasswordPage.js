@@ -7,7 +7,7 @@ import useResponsive from '../hooks/useResponsive';
 // components
 import Logo from '../components/logo';
 // sections
-import { LoginForm } from '../sections/auth/login';
+import { ForgotForm } from '../sections/auth/forgot';
 
 // ----------------------------------------------------------------------
 
@@ -70,10 +70,10 @@ export default function LoginPage() {
           <StyledContent>
             <Typography variant="h4" gutterBottom>
             <Divider sx={{ my: 3 }}>
-              Sign in to HRM
+              Forgot Password
             </Divider>
             </Typography>
-            <LoginForm />
+            <ForgotForm />
           </StyledContent>
         </Container>
       </StyledRoot>
