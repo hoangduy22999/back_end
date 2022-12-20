@@ -1,35 +1,19 @@
-import { logout } from '@/core/redux/authSlice';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// routes
+import Router from './routes';
+// theme
+import ThemeProvider from './theme';
+// components
+import ScrollToTop from './components/scroll-to-top';
+import { StyledChart } from './components/chart';
 
-const App = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+// ----------------------------------------------------------------------
 
+export default function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-      <div>
-        <button
-          onClick={() => {
-            dispatch(logout());
-            navigate('/login');
-          }}
-        >
-          Log Out
-        </button>
-      </div>
-    </div>
+    <ThemeProvider>
+      <ScrollToTop />
+      <StyledChart />
+      <Router />
+    </ThemeProvider>
   );
-};
-
-export default App;
+}

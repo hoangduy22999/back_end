@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "target": "es6",
-    "jsx": "react"
+    "module": "commonjs",
+    "baseUrl": "."
   },
-  "exclude": ["node_modules"],
-  "extends": "./jsconfig.paths.json"
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
