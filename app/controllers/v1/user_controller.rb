@@ -3,13 +3,9 @@
 module V1
   class UserController < ApplicationController
     def index
-      if can? :read, User
-        render json: User.all.ransack(params[:where]).result
-                         .order(params[:column] || "created_at" => params[:order] || "desc")
-                         .paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
-      else
-        permission_error
-      end
+      render json: User.all.ransack(params[:where]).result
+                        .order(params[:column] || "created_at" => params[:order] || "desc")
+                        .paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
     end
 
     def profile
