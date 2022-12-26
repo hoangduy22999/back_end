@@ -14,15 +14,15 @@ class ApplicationController < ActionController::API
   end
 
   def updated_render(record)
-    return render json: { message: "#{record.class.to_s} is successfully updated", record: record }, status: :ok
+    return render json: record, status: :ok
   end
 
   def created_render(record)
-    return render json: { message: "#{record.class.to_s} is successfully created", record: record }, status: :created
+    return render json: record, status: :created
   end
 
   def sucess_render(record)
-    return render json: { message: "Success", record: record }, status: :ok
+    return render json: record, status: :ok
   end
 
   def find_record(model)
