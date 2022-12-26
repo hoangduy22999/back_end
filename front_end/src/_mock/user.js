@@ -1,7 +1,11 @@
 import { faker } from '@faker-js/faker';
 import { sample } from 'lodash';
 
+import { usersService } from './../services/users/index'; 
+
 // ----------------------------------------------------------------------
+
+const data = usersService.getListUser();
 
 const users = [...Array(24)].map((_, index) => ({
   id: faker.datatype.uuid(),
